@@ -6,7 +6,7 @@ export default class Splash extends Component {
   render() {
     return (
       <FullContainer>
-        <Text style={{fontWeight: 'bold', fontSize: 18}}>Splash</Text>
+        <Text style={{fontWeight: 'bold', fontSize: 18}}>Welcome</Text>
       </FullContainer>
     );
   }
