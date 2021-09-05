@@ -5,6 +5,10 @@ import Logo from '../Images/logo.png';
 
 import {StatusBar, Text} from 'react-native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import * as RootNavigation from '../api/RootNavigation';
+
 import {
   FullContainer,
   TextoLogin,
@@ -37,13 +41,16 @@ export default function Login() {
         password: password,
       })
       .then(function (response) {
-        console.log(response.data);
+        AsyncStorage.setItem(
+          'loginLeaderApp',
+          JSON.stringify(response.data),
+          () => {},
+        );
+        RootNavigation.navigate('Home', '');
       })
       .catch(function (error) {
-        console.log(error);
+        setError('Tente novamente');
       });
-
-    console.log(response);
   }
 
   return (
