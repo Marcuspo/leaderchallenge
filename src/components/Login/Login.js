@@ -15,9 +15,12 @@ import {
   ButtonLogin,
 } from './Styles';
 
+import api from '../api/api';
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   function handleChangeEmail(element) {
     setEmail(element);
@@ -27,7 +30,21 @@ export default function Login() {
     setPassword(element);
   }
 
-  function handleSubmitForm() {}
+  async function handleSubmitForm() {
+    const response = await api
+      .post('/api-token-auth/', {
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    console.log(response);
+  }
 
   return (
     <FullContainer>
@@ -36,6 +53,7 @@ export default function Login() {
         <ImageLogo source={Logo} style={{resizeMode: 'contain'}} />
         <TextoLogin>Please make login</TextoLogin>
       </ContainerImage>
+      <TextoLogin>{error}</TextoLogin>
       <InfoContainer>
         <InputBottom
           placeholder="Email"
@@ -55,7 +73,7 @@ export default function Login() {
           returnKeyType="go"
           autoCorrect={false}
         />
-        <ButtonLogin>
+        <ButtonLogin onPress={handleSubmitForm}>
           <Text
             style={{
               textAlign: 'center',
