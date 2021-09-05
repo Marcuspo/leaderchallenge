@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 
 import Logo from '../Images/logo.png';
 
@@ -16,6 +16,19 @@ import {
 } from './Styles';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleChangeEmail(element) {
+    setEmail(element);
+  }
+
+  function handleChangePassword(element) {
+    setPassword(element);
+  }
+
+  function handleSubmitForm() {}
+
   return (
     <FullContainer>
       <StatusBar barStyle="light-content" />
@@ -29,12 +42,16 @@ export default function Login() {
           placeholderTextColor="rgba(255,255,255,0.8)"
           keyboardType="email-address"
           returnKeyType="next"
+          value={email}
+          onChangeText={handleChangeEmail}
           autoCorrect={false}
         />
         <InputBottom
           placeholder="Password"
+          value={password}
+          onChangeText={handleChangePassword}
           placeholderTextColor="rgba(255,255,255,0.8)"
-          keyboardType="email-address"
+          secureTextEntry
           returnKeyType="go"
           autoCorrect={false}
         />
