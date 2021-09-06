@@ -35,7 +35,7 @@ export default function Login() {
   }
 
   async function handleSubmitForm() {
-    const response = await api
+    const responseData = await api
       .post('/api-token-auth/', {
         email: email,
         password: password,
@@ -44,12 +44,16 @@ export default function Login() {
         AsyncStorage.setItem(
           'loginLeaderApp',
           JSON.stringify(response.data),
-          () => {},
+          () => {
+            console.log(responseData);
+          },
         );
         RootNavigation.navigate('Home', '');
+        setError('');
       })
-      .catch(function (error) {
+      .catch(function (e) {
         setError('Tente novamente');
+        console.log(e);
       });
   }
 

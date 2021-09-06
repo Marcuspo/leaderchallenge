@@ -8,13 +8,22 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Splash from './components/Splash/Splash';
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   const [splash, setSplash] = useState(true);
+  const [value, setValue] = useState('');
+  console.log(value);
+
+  async function getStorage() {
+    let data = await AsyncStorage.getItem('loginLeaderApp');
+    setValue(data);
+  }
 
   useEffect(() => {
+    getStorage();
     setTimeout(() => {
       setSplash(false);
     }, 2000);
@@ -25,16 +34,45 @@ export default function App() {
   ) : (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          initialRouteName="Login"
-          component={Login}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
-        <Stack.Screen name="Home" component={Home} />
+        {!value ? (
+          <>
+            <Stack.Screen
+              name="Login"
+              initialRouteName="Login"
+              component={Login}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen
+              name="Home"
+              options={{
+                headerShown: false,
+              }}
+              component={Home}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="Home"
+              initialRouteName="Home"
+              component={Home}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen
+              name="Login"
+              options={{
+                headerShown: false,
+              }}
+              component={Login}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
