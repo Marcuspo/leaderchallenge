@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {navigationRef} from './components/api/RootNavigation';
 
-import Dashboard from './components/Dashboard/Dashboard';
+import Dashboard from './components/Home/Home';
 import Splash from './components/Splash/Splash';
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const FullContainer = styled.View`
+export const FullContainer = styled.SafeAreaView`
   flex: 1;
   flex-direction: column;
   background-color: rgb(32, 53, 70);
@@ -44,4 +44,10 @@ export const InputBottom = styled.TextInput`
 
 export const ButtonLogin = styled.TouchableOpacity`
   background-color: blueviolet;
+`;
+
+export const KeyBoardStyle = styled.KeyboardAvoidingView`
+  flex: 1;
+  flex-direction: column;
+  background-color: rgb(32, 53, 70);
 `;

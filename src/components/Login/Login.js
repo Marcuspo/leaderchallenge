@@ -17,6 +17,7 @@ import {
   InfoContainer,
   InputBottom,
   ButtonLogin,
+  KeyBoardStyle,
 } from './Styles';
 
 import api from '../api/api';
@@ -53,6 +54,7 @@ export default function Login() {
       })
       .catch(function (e) {
         setError('Tente novamente');
+        setTimeout(setError(''), 4000);
         console.log(e);
       });
   }
@@ -60,42 +62,44 @@ export default function Login() {
   return (
     <FullContainer>
       <StatusBar barStyle="light-content" />
-      <ContainerImage>
-        <ImageLogo source={Logo} style={{resizeMode: 'contain'}} />
-        <TextoLogin>Please make login</TextoLogin>
-      </ContainerImage>
-      <TextoLogin>{error}</TextoLogin>
-      <InfoContainer>
-        <InputBottom
-          placeholder="Email"
-          placeholderTextColor="rgba(255,255,255,0.8)"
-          keyboardType="email-address"
-          returnKeyType="next"
-          value={email}
-          onChangeText={handleChangeEmail}
-          autoCorrect={false}
-        />
-        <InputBottom
-          placeholder="Password"
-          value={password}
-          onChangeText={handleChangePassword}
-          placeholderTextColor="rgba(255,255,255,0.8)"
-          secureTextEntry
-          returnKeyType="go"
-          autoCorrect={false}
-        />
-        <ButtonLogin onPress={handleSubmitForm}>
-          <Text
-            style={{
-              textAlign: 'center',
-              color: '#FFF',
-              fontWeight: 'bold',
-              fontSize: 18,
-            }}>
-            Login
-          </Text>
-        </ButtonLogin>
-      </InfoContainer>
+      <KeyBoardStyle behavior="padding">
+        <ContainerImage>
+          <ImageLogo source={Logo} style={{resizeMode: 'contain'}} />
+          <TextoLogin>Please make login</TextoLogin>
+        </ContainerImage>
+        <TextoLogin>{error}</TextoLogin>
+        <InfoContainer>
+          <InputBottom
+            placeholder="Email"
+            placeholderTextColor="rgba(255,255,255,0.8)"
+            keyboardType="email-address"
+            returnKeyType="next"
+            value={email}
+            onChangeText={handleChangeEmail}
+            autoCorrect={false}
+          />
+          <InputBottom
+            placeholder="Password"
+            value={password}
+            onChangeText={handleChangePassword}
+            placeholderTextColor="rgba(255,255,255,0.8)"
+            secureTextEntry
+            returnKeyType="go"
+            autoCorrect={false}
+          />
+          <ButtonLogin onPress={handleSubmitForm}>
+            <Text
+              style={{
+                textAlign: 'center',
+                color: '#FFF',
+                fontWeight: 'bold',
+                fontSize: 18,
+              }}>
+              Login
+            </Text>
+          </ButtonLogin>
+        </InfoContainer>
+      </KeyBoardStyle>
     </FullContainer>
   );
 }
